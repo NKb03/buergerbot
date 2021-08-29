@@ -1,0 +1,38 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "1.5.21"
+    id 'org.openjfx.javafxplugin' version "0.0.8"
+    id 'application'
+}
+
+group 'com.github.nkb03'
+version '1.0-SNAPSHOT'
+
+javafx {
+    version = '11.0.2'
+    modules = ['javafx.controls', 'javafx.web']
+    configuration = 'compile'
+}
+
+application {
+    mainClassName = 'buergerbot.App'
+    applicationDefaultJvmArgs = ['--add-opens', 'javafx.web/com.sun.webkit.dom=ALL-UNNAMED']
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.jetbrains.kotlin:kotlin-stdlib'
+}
+
+jar {
+    destinationDir(projectDir)
+    archiveName("buergerbot.jar")
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    manifest {
+        attributes 'Main-Class': 'buergerbot.App'
+    }
+}
