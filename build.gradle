@@ -32,6 +32,6 @@ jar {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
     manifest {
-        attributes 'Main-Class': 'buergerbot.App'
+        attributes 'Main-Class': 'buergerbot.Main'
     }
 }
